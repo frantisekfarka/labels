@@ -1,0 +1,146 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={210mm,297mm},
+	left=0mm,
+	right=0mm,
+	top=20mm,
+	bottom=0mm,
+}
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,calc,positioning}
+
+\usepackage{ wasysym }
+
+\newcommand{\mcol}{white}
+\newcommand{\mmcol}{yellow}
+\newcommand{\lw}{80mm}
+\newcommand{\tw}{\lw - 5mm}
+\newcommand{\lh}{66mm}
+\newcommand{\row}[1]{(\lh - 4mm) / 2 - (\lh / 18) - #1 * ((\lh - 4mm) / 9)}
+\newcommand{\col}[2]{-\lw / 2 + \lw / (2 * #2) + #1 * (\lw / #2)}
+
+\newcommand{\gender}[1]{
+	\ifx#1m \male
+	\else\if#1f \female
+	\else #1
+	\fi\fi
+}
+
+\newcommand{\mylabel}[7]{
+	\noindent
+	\begin{tikzpicture}[
+		%framed,
+		collection/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw}
+		},
+		species/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw}
+		},
+		who/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw}
+		},
+		sep/.style = {
+			draw,
+			line width=2.2pt
+		},
+		colId/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw / 2} 
+		},
+		collectorId/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw / 4}
+		},
+		gender/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw / 4}
+		},
+		location/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw}
+		},
+		locationPrec/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=left
+		},
+		date/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=left
+		},
+		author/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=left
+		},
+		bb/.style = {
+			draw={\mmcol},
+			minimum width={\lw},
+			minimum height={\lh},
+		}
+	]
+
+	\node[collection]	at ( 0, {\row{0}})	{Collectio Musei Nationalis Pragae};
+	\node[species]		at ( 0, {\row{1}})	{ \LARGE \em #3 #4};
+	\node[who]		at ( 0, {\row{2}})	{Harrison, 1979};
+	\draw[sep] ({\col{0}{8}},{\row{3}}) -- ({\col{7}{8}},{\row{3}});
+	\node[colId]		at ({\col{0}{2}}, {\row{4}})	{#2};
+	\node[collectorId]	at ({\col{2}{4}}, {\row{4}})	{(#1)};
+	\node[gender]		at ({\col{3}{4}}, {\row{4}})	{\LARGE \gender{#7}};
+	\node[location]		at ( 0, {\row{5}})	{\LARGE OMAN};
+	\node[locationPrec]	at ( 0, {\row{6}})	{Al Aquar, oasis (Batinah Prov.)};
+	\node[date]		at ( 0, {\row{7}})	{#6};
+	\node[author]		at ( 0, {\row{8}})	{leg. P. Benda, A. Reiter \& M. Uhrin};
+	\node[bb] (boundbox) {};
+
+	\draw ({-\lw / 2 - 7mm},{- \lh / 2}) -- ({-\lw / 2 - 2mm)}, {-\lh / 2}) ;
+	\draw ({-\lw / 2 - 7mm},{+ \lh / 2}) -- ({-\lw / 2 - 2mm)}, { \lh / 2}) ;
+	\draw ({ \lw / 2 + 7mm},{- \lh / 2}) -- ({ \lw / 2 + 2mm)}, {-\lh / 2}) ;
+	\draw ({ \lw / 2 + 7mm},{+ \lh / 2}) -- ({ \lw / 2 + 2mm)}, { \lh / 2}) ;
+
+	\draw ({-\lw / 2},{- \lh / 2 - 7mm}) -- ({-\lw / 2)}, {-\lh / 2 - 2mm}) ;
+	\draw ({-\lw / 2},{+ \lh / 2 + 7mm}) -- ({-\lw / 2)}, { \lh / 2 + 2mm}) ;
+	\draw ({ \lw / 2},{- \lh / 2 - 7mm}) -- ({ \lw / 2)}, {-\lh / 2 - 2mm}) ;
+	\draw ({ \lw / 2},{+ \lh / 2 + 7mm}) -- ({ \lw / 2)}, { \lh / 2 + 2mm}) ;
+
+	\end{tikzpicture}
+	\the\counter
+	\advance\counter by 1
+	\ifodd \counter
+		%nothing
+	\else
+		\\
+	\fi
+}
+
+\begin{document}
+
+\newcount\counter
+\counter 0
+
+\sffamily
+
+\input{labels}
+
+\end{document}

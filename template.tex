@@ -1,12 +1,17 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
 \usepackage{geometry}
+
+\usepackage[scaled]{uarial}
+\renewcommand*\familydefault{\sfdefault} 
+\usepackage[T1]{fontenc}
+
 \geometry{
 	a4paper,
 	total={210mm,297mm},
 	left=0mm,
 	right=0mm,
-	top=20mm,
+	top=0mm,
 	bottom=0mm,
 }
 
@@ -17,11 +22,15 @@
 
 \newcommand{\mcol}{white}
 \newcommand{\mmcol}{yellow}
-\newcommand{\lw}{80mm}
+\newcommand{\lw}{50mm}
 \newcommand{\tw}{\lw - 5mm}
-\newcommand{\lh}{66mm}
+\newcommand{\lh}{41mm}
 \newcommand{\row}[1]{(\lh - 4mm) / 2 - (\lh / 18) - #1 * ((\lh - 4mm) / 9)}
 \newcommand{\col}[2]{-\lw / 2 + \lw / (2 * #2) + #1 * (\lw / #2)}
+\newcommand{\lbllmar}{-\lw / 2 - 2mm } 
+\newcommand{\lblrmar}{\lw / 2 + 2mm } 
+
+\newcommand{\musnum}{NMP6V}
 
 \newcommand{\gender}[1]{
 	\ifx#1m \male
@@ -30,7 +39,13 @@
 	\fi\fi
 }
 
-\newcommand{\mylabel}[7]{
+%Black Tex magic - macro with 10+ args
+\newcommand{\mylabel}[2]{
+	\def\tempgen{#1}%
+	\def\tempspec{#2}%
+	\mylabelcont
+}
+\newcommand{\mylabelcont}[8]{
 	\noindent
 	\begin{tikzpicture}[
 		%framed,
@@ -56,7 +71,9 @@
 		colId/.style = {
 			draw={\mcol},
 			rectangle,
-			minimum width={\lw / 2} 
+			minimum width={\lw / 2},
+			text width={\tw},
+			align=left
 		},
 		collectorId/.style = {
 			draw={\mcol},
@@ -94,6 +111,10 @@
 			text width={\tw},
 			align=left
 		},
+		counter/.style = {
+			draw={\mcol},
+			rectangle,
+		},
 		bb/.style = {
 			draw={\mmcol},
 			minimum width={\lw},
@@ -101,17 +122,17 @@
 		}
 	]
 
-	\node[collection]	at ( 0, {\row{0}})	{Collectio Musei Nationalis Pragae};
-	\node[species]		at ( 0, {\row{1}})	{ \LARGE \em #3 #4};
-	\node[who]		at ( 0, {\row{2}})	{Harrison, 1979};
-	\draw[sep] ({\col{0}{8}},{\row{3}}) -- ({\col{7}{8}},{\row{3}});
-	\node[colId]		at ({\col{0}{2}}, {\row{4}})	{#2};
-	\node[collectorId]	at ({\col{2}{4}}, {\row{4}})	{(#1)};
-	\node[gender]		at ({\col{3}{4}}, {\row{4}})	{\LARGE \gender{#7}};
-	\node[location]		at ( 0, {\row{5}})	{\LARGE OMAN};
-	\node[locationPrec]	at ( 0, {\row{6}})	{Al Aquar, oasis (Batinah Prov.)};
-	\node[date]		at ( 0, {\row{7}})	{#6};
-	\node[author]		at ( 0, {\row{8}})	{leg. P. Benda, A. Reiter \& M. Uhrin};
+	\node[collection]	at ( 0, {\row{0}}) {\fontsize{7pt}{1em}\selectfont Collectio Musei Nationalis Pragae};
+	\node[species]		at ( 0, {\row{1}}) {\fontsize{12pt}{1em}\selectfont  \em \tempgen{} \tempspec};
+	\node[who]		at ( 0, {\row{2}}) {\fontsize{7pt}{1em}\selectfont #6};
+	\draw[sep] ({\lbllmar},{\row{3}}) -- ({\lblrmar},{\row{3}});
+	\node[colId]		at ( 0, {\row{4}}) {\fontsize{8pt}{1em}\selectfont\musnum#3};
+	\node[collectorId]	at ({\col{2}{4}}, {\row{4}}) {\fontsize{8pt}{1em}\selectfont(#8)};
+	\node[gender]		at ({\col{3}{4}}, {\row{4}}) {\fontsize{8pt}{1em}\selectfont\gender{#5}};
+	\node[location]		at ( 0, {\row{5}}) {\fontsize{12pt}{1em}\selectfont#7};
+	\node[locationPrec]	at ( 0, {\row{6}}) {\fontsize{8pt}{1em}\selectfont#1};
+	\node[date]		at ( 0, {\row{7}}) {\fontsize{8pt}{1em}\selectfont#2};
+	\node[author]		at ( 0, {\row{8}}) {\fontsize{8pt}{1em}\selectfont{}leg. #4};
 	\node[bb] (boundbox) {};
 
 	\draw ({-\lw / 2 - 7mm},{- \lh / 2}) -- ({-\lw / 2 - 2mm)}, {-\lh / 2}) ;
@@ -124,22 +145,27 @@
 	\draw ({ \lw / 2},{- \lh / 2 - 7mm}) -- ({ \lw / 2)}, {-\lh / 2 - 2mm}) ;
 	\draw ({ \lw / 2},{+ \lh / 2 + 7mm}) -- ({ \lw / 2)}, { \lh / 2 + 2mm}) ;
 
+	\node[counter]		at ( {\lw / 2 + 3mm}, { - \lw / 2 + 1mm}) {\the\counter};
+
 	\end{tikzpicture}
-	\the\counter
 	\advance\counter by 1
-	\ifodd \counter
-		%nothing
-	\else
+	\advance\modulo by 1
+	\ifnum \modulo = 3
 		\\
+		\modulo 0
+	\else
+		%nothing
 	\fi
 }
 
 \begin{document}
 
 \newcount\counter
+\newcount\modulo
 \counter 0
+\modulo 0
 
-\sffamily
+%\sffamily
 
 \input{labels}
 

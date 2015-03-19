@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SED=sed
 INTER=labels.tex
@@ -8,8 +8,11 @@ EXT=pdf
 MV=mv
 CAT=cat
 CUT="cut -d;"
-CP=scp
-DEST_PATH=files.farka.eu:/home/fari/pub/lucka
+CP=cp
+DEST_PATH=out
+
+#DEST_PATH=files.farka.eu:/home/fari/pub/lucka
+. .config
 
 if [ $# -eq 0 ]; then
 	echo "Provide a filename to process ..."

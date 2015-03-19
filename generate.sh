@@ -11,7 +11,6 @@ CUT="cut -d;"
 CP=cp
 DEST_PATH=out
 
-#DEST_PATH=files.farka.eu:/home/fari/pub/lucka
 . .config
 
 if [ $# -eq 0 ]; then

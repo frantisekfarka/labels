@@ -8,6 +8,8 @@ EXT=pdf
 MV=mv
 CAT=cat
 CUT="cut -d;"
+CP=scp
+DEST_PATH=files.farka.eu:/home/fari/pub/lucka
 
 if [ $# -eq 0 ]; then
 	echo "Provide a filename to process ..."
@@ -22,4 +24,5 @@ do
 	$TEX $TEMPLATE
 	OUT=`basename $FILE .csv`".$EXT"
 	$MV ${TEMPLATE}.$EXT $OUT
+	$CP $OUT $DEST_PATH
 done

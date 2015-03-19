@@ -122,3 +122,7 @@ sympy-plots-for-*.tex/
 
 # aspell bak files
 *.bak
+
+#input files
+src/*.xls
+src/*.csv

@@ -1,17 +1,22 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,landscape]{article}
 
 \usepackage{geometry}
+\usepackage{xstring}
+
+\usepackage[none]{hyphenat}
 
 \usepackage[scaled]{uarial}
 \renewcommand*\familydefault{\sfdefault} 
 \usepackage[T1]{fontenc}
 
+\usepackage[utf8]{inputenc}
+
 \geometry{
 	a4paper,
 	total={210mm,297mm},
-	left=0mm,
+	left=20mm,
 	right=0mm,
-	top=0mm,
+	top=3mm,
 	bottom=0mm,
 }
 
@@ -20,7 +25,7 @@
 
 \usepackage{ wasysym }
 
-\newcommand{\mcol}{white}
+\newcommand{\mcol}{none}
 \newcommand{\mmcol}{yellow}
 \newcommand{\lw}{50mm}
 \newcommand{\tw}{\lw - 5mm}
@@ -41,8 +46,8 @@
 
 %Black Tex magic - macro with 10+ args
 \newcommand{\mylabel}[2]{
-	\def\tempgen{#1}%
-	\def\tempspec{#2}%
+	\def\tempgen{\emph{#1}}%
+	\def\tempspec{\IfStrEq{#2}{sp.}{sp.}{\emph{#2}}}%
 	\mylabelcont
 }
 \newcommand{\mylabelcont}[8]{
@@ -111,6 +116,14 @@
 			text width={\tw},
 			align=left
 		},
+		locdateleg/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=left,
+			anchor=north 
+		},
 		counter/.style = {
 			draw={\mcol},
 			rectangle,
@@ -123,34 +136,38 @@
 	]
 
 	\node[collection]	at ( 0, {\row{0}}) {\fontsize{7pt}{1em}\selectfont Collectio Musei Nationalis Pragae};
-	\node[species]		at ( 0, {\row{1}}) {\fontsize{12pt}{1em}\selectfont  \em \tempgen{} \tempspec};
+	\node[species]		at ( 0, {\row{1}}) {\fontsize{12pt}{1em}\selectfont \tempgen{} \tempspec};
 	\node[who]		at ( 0, {\row{2}}) {\fontsize{7pt}{1em}\selectfont #6};
 	\draw[sep] ({\lbllmar},{\row{3}}) -- ({\lblrmar},{\row{3}});
 	\node[colId]		at ( 0, {\row{4}}) {\fontsize{8pt}{1em}\selectfont\musnum#3};
 	\node[collectorId]	at ({\col{2}{4}}, {\row{4}}) {\fontsize{8pt}{1em}\selectfont(#8)};
 	\node[gender]		at ({\col{3}{4}}, {\row{4}}) {\fontsize{8pt}{1em}\selectfont\gender{#5}};
 	\node[location]		at ( 0, {\row{5}}) {\fontsize{12pt}{1em}\selectfont#7};
-	\node[locationPrec]	at ( 0, {\row{6}}) {\fontsize{8pt}{1em}\selectfont#1};
-	\node[date]		at ( 0, {\row{7}}) {\fontsize{8pt}{1em}\selectfont#2};
-	\node[author]		at ( 0, {\row{8}}) {\fontsize{8pt}{1em}\selectfont{}leg. #4};
+	
+	%\node[locationPrec]	at ( 0, {\row{6}}) {\fontsize{8pt}{1em}\selectfont#1};
+	%\node[date]		at ( 0, {\row{7}}) {\fontsize{8pt}{1em}\selectfont#2};
+	%\node[author]		at ( 0, {\row{8}}) {\fontsize{8pt}{1em}\selectfont{}leg. #4};
+	\node[locdateleg]	at ( 0, {\row{5.5}}) {\fontsize{8pt}{1.2em}\selectfont{}#1{~}\\#2{~}\\leg. #4};
+	
+	
 	\node[bb] (boundbox) {};
 
-	\draw ({-\lw / 2 - 7mm},{- \lh / 2}) -- ({-\lw / 2 - 2mm)}, {-\lh / 2}) ;
-	\draw ({-\lw / 2 - 7mm},{+ \lh / 2}) -- ({-\lw / 2 - 2mm)}, { \lh / 2}) ;
-	\draw ({ \lw / 2 + 7mm},{- \lh / 2}) -- ({ \lw / 2 + 2mm)}, {-\lh / 2}) ;
-	\draw ({ \lw / 2 + 7mm},{+ \lh / 2}) -- ({ \lw / 2 + 2mm)}, { \lh / 2}) ;
+	\draw ({-\lw / 2 - 4mm},{- \lh / 2}) -- ({-\lw / 2 - 2mm)}, {-\lh / 2}) ;
+	\draw ({-\lw / 2 - 4mm},{+ \lh / 2}) -- ({-\lw / 2 - 2mm)}, { \lh / 2}) ;
+	\draw ({ \lw / 2 + 4mm},{- \lh / 2}) -- ({ \lw / 2 + 2mm)}, {-\lh / 2}) ;
+	\draw ({ \lw / 2 + 4mm},{+ \lh / 2}) -- ({ \lw / 2 + 2mm)}, { \lh / 2}) ;
 
-	\draw ({-\lw / 2},{- \lh / 2 - 7mm}) -- ({-\lw / 2)}, {-\lh / 2 - 2mm}) ;
-	\draw ({-\lw / 2},{+ \lh / 2 + 7mm}) -- ({-\lw / 2)}, { \lh / 2 + 2mm}) ;
-	\draw ({ \lw / 2},{- \lh / 2 - 7mm}) -- ({ \lw / 2)}, {-\lh / 2 - 2mm}) ;
-	\draw ({ \lw / 2},{+ \lh / 2 + 7mm}) -- ({ \lw / 2)}, { \lh / 2 + 2mm}) ;
+	\draw ({-\lw / 2},{- \lh / 2 - 4mm}) -- ({-\lw / 2)}, {-\lh / 2 - 2mm}) ;
+	\draw ({-\lw / 2},{+ \lh / 2 + 4mm}) -- ({-\lw / 2)}, { \lh / 2 + 2mm}) ;
+	\draw ({ \lw / 2},{- \lh / 2 - 4mm}) -- ({ \lw / 2)}, {-\lh / 2 - 2mm}) ;
+	\draw ({ \lw / 2},{+ \lh / 2 + 4mm}) -- ({ \lw / 2)}, { \lh / 2 + 2mm}) ;
 
-	\node[counter]		at ( {\lw / 2 + 3mm}, { - \lw / 2 + 1mm}) {\the\counter};
+	\node[counter]		at ( {\lw / 2 - 6mm}, { - \lh / 2 - 3mm}) {\fontsize{6pt}{0.5em}\selectfont\the\counter};
 
 	\end{tikzpicture}
 	\advance\counter by 1
 	\advance\modulo by 1
-	\ifnum \modulo = 3
+	\ifnum \modulo = 4
 		\\
 		\modulo 0
 	\else
@@ -159,6 +176,8 @@
 }
 
 \begin{document}
+
+\linespread{0.65}
 
 \newcount\counter
 \newcount\modulo

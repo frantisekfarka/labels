@@ -129,3 +129,6 @@ src/*.csv
 
 #output files
 out/*.pdf
+
+#config
+.config

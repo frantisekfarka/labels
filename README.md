@@ -7,5 +7,5 @@ Latex tempalte for generating labels from csv (and initialy excel) file
 Just use the ``generate.sh`` with some input file:
 
 ```bash
-> ./generate.sh src/sample.csv
+./generate.sh src/sample.csv
 ```

@@ -1,0 +1,232 @@
+\documentclass[12pt,portrait]{article}
+
+\usepackage{geometry}
+\usepackage{xstring}
+\usepackage{calc}
+
+\usepackage[letterspace=150]{microtype}
+
+\usepackage[none]{hyphenat}
+
+\usepackage[scaled]{uarial}
+\renewcommand*\familydefault{\sfdefault} 
+\usepackage[T1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+\usepackage{adjustbox}
+
+\geometry{
+	a4paper,
+	total={210mm,297mm},
+	left=5mm,
+	right=0mm,
+	top=5mm,
+	bottom=0mm,
+}
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,calc,positioning}
+
+\usepackage{ wasysym }
+
+\newcommand{\mcol}{none}
+\newcommand{\mmcol}{none}
+\newcommand{\lw}{80mm}
+\newcommand{\tw}{75mm} %{\lw - 5mm}
+\newcommand{\lh}{56mm}
+\newcommand{\row}[1]{(\lh - 4mm) / 2 - (\lh / 20) - #1 * ((\lh - 4mm) / 10)}
+\newcommand{\col}[2]{-\lw / 2 + \lw / (2 * #2) + #1 * (\lw / #2)}
+\newcommand{\lbllmar}{-\lw / 2 + 5mm } 
+\newcommand{\lblrmar}{\lw / 2 - 5mm } 
+
+%\newcommand{\collectio}{Collectio Musei Nationalis Pragae}
+\newcommand{\collectio}{~}
+
+\newcommand{\musnum}{NMP6V}
+
+\newlength{\myl}
+
+\newcommand{\genspec}[1]{
+	\settowidth{\myl}{\fontsize{#1pt}{1em}\selectfont\tempgen{} \tempspec{}}%
+	\ifdim\myl>\tw%
+		\size #1%
+		\advance \size by -1%
+		\genspec{\size}%
+	\else%
+		\fontsize{#1}{1em}\selectfont \tempgen{} \tempspec{}%
+	\fi%
+}
+
+\newcommand{\locprec}[2]{
+	\settowidth{\myl}{\fontsize{#1pt}{1em}\selectfont#2}%
+	\ifdim\myl>\tw%
+		\size #1%
+		\advance \size by -1%
+		\locprec{\size}{#2}%
+	\else%
+		\fontsize{#1}{1em}\selectfont#2%
+	\fi%
+}
+
+\def\replace#1#2#3{%
+	 \def\tmp##1#2{##1#3\tmp}%
+	    \tmp#1\stopreplace#2\stopreplace}
+	    \def\stopreplace#1\stopreplace{}
+
+\newcommand{\gender}[1]{
+	#1
+%	\ifx#1m \male
+%	\else\if#1f \female
+%	\else #1
+%	\fi\fi
+}
+
+%Black Tex magic - macro with 10+ args
+\newcommand{\mylabel}[2]{
+	\def\tempgen{\bf\emph{#1}}%
+	\def\tempspec{\IfStrEq{#2}{sp.}{sp.}{\bf\emph{#2}}}%
+	\mylabelcont
+}
+\newcommand{\mylabelcont}[8]{
+	\noindent
+	\begin{tikzpicture}[
+		%framed,
+		collection/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw}
+		},
+		species/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+		},
+		who/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw}
+		},
+		sep/.style = {
+			draw,
+			line width=1.0pt
+		},
+		colId/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw / 2},
+			text width={\tw},
+			align=left
+		},
+		collectorId/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw / 2},
+			text width={\tw},
+			align=left
+		},
+		gender/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw / 4}
+		},
+		location/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw}
+		},
+		locationPrec/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=center
+		},
+		date/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=left
+		},
+		author/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=center
+		},
+		dateleg/.style = {
+			draw={\mcol},
+			rectangle,
+			minimum width={\lw},
+			text width={\tw},
+			align=left,
+			anchor=north 
+		},
+		counter/.style = {
+			draw={\mcol},
+			rectangle,
+		},
+		bb/.style = {
+			draw={\mmcol},
+			minimum width={\lw},
+			minimum height={\lh},
+		}
+	]
+
+	\node[collection]	at ( 0, {\row{0} + 2mm}) {\fontsize{8pt}{1em}\selectfont\collectio};
+	\node[species]		at ( 0, {\row{1}}) {\genspec{15}};
+	\node[who]		at ( 0, {\row{2}}) {\fontsize{10pt}{1em}\selectfont #6};
+	\draw[sep] ({-\lw / 2 - 2mm},{\row{3}+2.5mm}) -- ({\lw / 2 + 2mm},{\row{3}+2.5mm});
+	\node[colId]		at ( 0, {\row{4} + 5mm}) {\fontsize{10pt}{1em}\selectfont\musnum{}  #3};
+	\node[gender]		at ({\col{3}{4}}, {\row{4} + 5mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};
+	\node[collectorId]	at ( 0, {\row{5} + 5mm}) {\fontsize{9pt}{1em}\selectfont(#8)};
+	\node[location]		at ( 0, {\row{6} + 4mm}) {\fontsize{15pt}{1em}\selectfont\bf\textls{\uppercase{#7}}};
+	
+	%\node[locationPrec]	at ( 0, {\row{7}-1mm}) {\locprec{9}{#1} };
+	\node[locationPrec]	at ( 0, {\row{7}+0mm}) {\fontsize{10pt}{1em}\selectfont#1, #2};
+	%\node[date]		at ( 0, {\row{7}}) {\fontsize{8pt}{1em}\selectfont#2};
+	%\node[dateleg]		at ( 0, {\row{6.5}+1mm}) {\fontsize{9pt}{1.2em}\selectfont{}#2{~}\\leg. #4};
+	\node[author]		at ( 0, {\row{9}+2mm}) {\fontsize{9pt}{1em}\selectfont{}leg. #4};
+	
+	
+	\node[bb] (boundbox) {};
+
+	\draw ({-\lw / 2 - 2mm},{- \lh / 2}) -- ({-\lw / 2 + 1mm)}, {-\lh / 2}) ;
+	\draw ({-\lw / 2 - 2mm},{+ \lh / 2}) -- ({-\lw / 2 + 1mm)}, { \lh / 2}) ;
+	\draw ({ \lw / 2 + 2mm},{- \lh / 2}) -- ({ \lw / 2 - 1mm)}, {-\lh / 2}) ;
+	\draw ({ \lw / 2 + 2mm},{+ \lh / 2}) -- ({ \lw / 2 - 1mm)}, { \lh / 2}) ;
+
+	\draw ({-\lw / 2},{- \lh / 2 - 2mm}) -- ({-\lw / 2)}, {-\lh / 2 + 1mm}) ;
+	\draw ({-\lw / 2},{+ \lh / 2 + 2mm}) -- ({-\lw / 2)}, { \lh / 2 - 1mm}) ;
+	\draw ({ \lw / 2},{- \lh / 2 - 2mm}) -- ({ \lw / 2)}, {-\lh / 2 + 1mm}) ;
+	\draw ({ \lw / 2},{+ \lh / 2 + 2mm}) -- ({ \lw / 2)}, { \lh / 2 - 1mm}) ;
+
+	\node[counter]		at ( {\lw / 2 - 6mm}, { - \lh / 2 - 3mm}) {\fontsize{6pt}{0.5em}\selectfont\the\counter};
+
+	\end{tikzpicture}
+	\advance\counter by 1
+	\advance\modulo by 1
+	\ifnum \modulo = 2
+		\\
+		\modulo 0
+	\else
+		%nothing
+	\fi
+}
+
+\begin{document}
+
+\linespread{0.65}
+
+\newcount\counter
+\newcount\modulo
+\newcount\size
+\counter 0
+\modulo 0
+
+%\sffamily
+
+\input{labels}
+
+\end{document}

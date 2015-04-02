@@ -18,17 +18,12 @@ if [ $# -le 1 ]; then
 	exit 1
 fi
 
-if [ $1 = template ]; then
-	echo "Using normal template"
-	TEMPLATE=template
-else 
-	if [ $1 = ethanol ]; then
-		TEMPLATE=ethanol
-		echo "Using Etanol template"
-	else
-		echo "Unknow template $1. Die!"
-		exit 1
-	fi
+if [ -f ${1}.tex ]; then
+	TEMPLATE=$1
+	echo "Using '$TEMPLATE' template"
+else
+	echo "Unknow template $1. Die!"
+	exit 1
 fi
 
 shift
@@ -36,7 +31,7 @@ shift
 for FILE in $@ 
 do
 	echo Processing file $FILE
-		#| head -n 20 \
+	#	| head -n 20 \
 	$CAT $FILE | $CUT -f1,2,3,4,6,8,9,10,11,12 \
 		| $SED 's/\&/\\&/g;s/;/}{/g;s/^/\\mylabel{/;s/$/}/' > $INTER 
 	$TEX $TEMPLATE

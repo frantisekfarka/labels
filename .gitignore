@@ -125,6 +125,7 @@ sympy-plots-for-*.tex/
 
 #input files
 src/*.xls
+src/*.xlsx
 src/*.csv
 
 #output files

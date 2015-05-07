@@ -87,7 +87,7 @@
 	\def\tempspec{\IfStrEq{#2}{sp.}{sp.}{\bf\emph{#2}}}%
 	\mylabelcont
 }
-\newcommand{\mylabelcont}[8]{
+\newcommand{\mylabelcont}[9]{
 	\noindent
 	\begin{tikzpicture}[
 		%framed,
@@ -104,7 +104,13 @@
 		who/.style = {
 			draw={\mcol},
 			rectangle,
-			minimum width={\lw}
+			minimum width={\lw},
+			text width={\tw}
+		},
+		whoyear/.style = {
+			draw={\mcol},
+			rectangle,
+			text width={\tw / 4}
 		},
 		sep/.style = {
 			draw,
@@ -175,11 +181,12 @@
 	]
 
 	\node[collection]	at ( 0, {\row{0} + 2mm}) {\fontsize{8pt}{1em}\selectfont\collectio};
-	\node[species]		at ( 0, {\row{1}}) {\genspec{15}};
+	\node[species]		at ( 0, {\row{1} + 2mm}) {\genspec{15}};
 	\node[who]		at ( 0, {\row{2}}) {\fontsize{10pt}{1em}\selectfont #6};
-	\draw[sep] ({-\lw / 2 - 2mm},{\row{3}+2.5mm}) -- ({\lw / 2 + 2mm},{\row{3}+2.5mm});
-	\node[colId]		at ( 0, {\row{4} + 5mm}) {\fontsize{10pt}{1em}\selectfont\musnum{}  #3};
-	\node[gender]		at ({\col{3}{4}}, {\row{4} + 5mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};
+	\node[whoyear]		at ( {\col{6}{8} }, {\row{2} - 1.5mm}) {\fontsize{10pt}{1em}\selectfont #9};
+	\draw[sep] ({-\lw / 2 - 2mm},{\row{3}+0.5mm}) -- ({\lw / 2 + 2mm},{\row{3}+0.5mm});
+	\node[colId]		at ( 0, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\musnum{}  #3};
+	\node[gender]		at ({\col{3}{4}}, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};
 	\node[collectorId]	at ( 0, {\row{5} + 5mm}) {\fontsize{9pt}{1em}\selectfont(#8)};
 	\node[location]		at ( 0, {\row{6} + 4mm}) {\fontsize{15pt}{1em}\selectfont\bf\textls{\uppercase{#7}}};
 	

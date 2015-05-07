@@ -32,7 +32,7 @@ for FILE in $@
 do
 	echo Processing file $FILE
 	#	| head -n 20 \
-	$CAT $FILE | $CUT -f1,2,3,4,6,8,9,10,11,12 \
+	$CAT $FILE | $CUT -f1,2,3,4,6,8,9,10,11,12,13 \
 		| $SED 's/\&/\\&/g;s/;/}{/g;s/^/\\mylabel{/;s/$/}/' > $INTER 
 	$TEX $TEMPLATE
 	OUT=`basename $FILE .csv`".$EXT"

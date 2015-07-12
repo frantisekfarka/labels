@@ -174,7 +174,7 @@
 	%\node[date]		at ( 0, {\row{7}}) {\fontsize{8pt}{1em}\selectfont#2};
 	%\node[author]		at ( 0, {\row{8}}) {\fontsize{8pt}{1em}\selectfont{}leg. #4};
 	%\node[dateleg]		at ( 0, {\row{6.5}+1mm}) {\fontsize{9pt}{1.2em}\selectfont{}#2{~}\\leg. #4};
-	\node[dateleg]	at ( 0, {\row{5}-2mm}) {\fontsize{9pt}{1.2em}\selectfont{}#1\\#2{~}\\leg. #4};
+	\node[dateleg]	at ( 0, {\row{5}-2mm}) {\fontsize{7.6pt}{1.2em}\selectfont{}#1\\#2{~}\\leg. #4};
 	
 	
 	\node[bb] (boundbox) {};
@@ -188,6 +188,18 @@
 	\draw ({-\lw / 2},{+ \lh / 2 + 2mm}) -- ({-\lw / 2)}, { \lh / 2 + 1mm}) ;
 	\draw ({ \lw / 2},{- \lh / 2 - 2mm}) -- ({ \lw / 2)}, {-\lh / 2 - 1mm}) ;
 	\draw ({ \lw / 2},{+ \lh / 2 + 2mm}) -- ({ \lw / 2)}, { \lh / 2 + 1mm}) ;
+
+
+
+	\draw [color=lightgray] ({-\lw / 2 - 1mm},{- \lh / 2}) -- ({-\lw / 2 + 0.5mm)}, {-\lh / 2}) ;
+	\draw [color=lightgray] ({-\lw / 2 - 1mm},{+ \lh / 2}) -- ({-\lw / 2 + 0.5mm)}, { \lh / 2}) ;
+	\draw [color=lightgray] ({ \lw / 2 + 1mm},{- \lh / 2}) -- ({ \lw / 2 - 0.5mm)}, {-\lh / 2}) ;
+	\draw [color=lightgray] ({ \lw / 2 + 1mm},{+ \lh / 2}) -- ({ \lw / 2 - 0.5mm)}, { \lh / 2}) ;
+
+	\draw [color=lightgray] ({-\lw / 2},{- \lh / 2 - 1mm}) -- ({-\lw / 2)}, {-\lh / 2 + 0.5mm}) ;
+	\draw [color=lightgray] ({-\lw / 2},{+ \lh / 2 + 1mm}) -- ({-\lw / 2)}, { \lh / 2 - 0.5mm}) ;
+	\draw [color=lightgray] ({ \lw / 2},{- \lh / 2 - 1mm}) -- ({ \lw / 2)}, {-\lh / 2 + 0.5mm}) ;
+	\draw [color=lightgray] ({ \lw / 2},{+ \lh / 2 + 1mm}) -- ({ \lw / 2)}, { \lh / 2 - 0.5mm}) ;
 
 	\node[counter]		at ( {\lw / 2 - 6mm}, { - \lh / 2 - 3mm}) {\fontsize{6pt}{0.5em}\selectfont\the\counter};
 

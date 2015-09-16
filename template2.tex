@@ -15,12 +15,14 @@
 
 \geometry{
 	a4paper,
-	total={210mm,297mm},
-	left=20mm,
+	total={297mm,210mm},
+	left=15mm,
 	right=0mm,
-	top=3mm,
+	top=20mm,
 	bottom=0mm,
 }
+
+\DeclareUnicodeCharacter{00A0}{~}
 
 \usepackage{tikz}
 \usetikzlibrary{backgrounds,calc,positioning}
@@ -28,7 +30,7 @@
 \usepackage{ wasysym }
 
 \newcommand{\mcol}{none}
-\newcommand{\mmcol}{yellow}
+\newcommand{\mmcol}{none}
 \newcommand{\lw}{45mm}
 \newcommand{\tw}{43mm} % {\lw - 5mm}
 \newcommand{\lh}{50mm}
@@ -61,6 +63,11 @@
 	\else\if#1f \female
 	\else #1
 	\fi\fi
+}
+
+\newcommand{\collectorId}[2]{
+	\fontsize{#1pt}{1em}\selectfont%
+	\IfStrEq{#2}{}{}{(#2)}%
 }
 
 %Black Tex magic - macro with 10+ args
@@ -159,11 +166,11 @@
 	\node[who]		at ( 0, {\row{2} + 2mm}) {\fontsize{8pt}{1em}\selectfont #6};
 	\draw[sep] ({\lbllmar},{\row{3} + 3mm}) -- ({\lblrmar},{\row{3} + 3mm});
 	\node[colId]		at ( 0, {\row{3} - 0mm}) {\fontsize{10pt}{1em}\selectfont\musnum#3};
-	\node[collectorId]	at ({\col{5}{8}}, {\row{3} + 0mm}) {\fontsize{9pt}{1em}\selectfont(#8)};
+	\node[collectorId]	at ({\col{5}{8}}, {\row{3} + 0mm}) {\collectorId{9}{#8}};
 	\node[gender]		at ({\col{3}{4}}, {\row{3} + 0mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};
 	\node[location]		at ( 0, {\row{4} - 1mm}) {\fontsize{15pt}{1em}\selectfont#7};
 	
-	\node[locationPrec]	at ( 0, {\row{6}}) {\locprec{9}{#1}};
+	\node[locationPrec]	at ( 0, {\row{6}}) {\locprec{8}{#1}};
 	\node[date]		at ( 0, {\row{7.5}-1mm}) {\fontsize{8pt}{1em}\selectfont#2};
 	\node[author]		at ( 0, {\row{9}}) {\fontsize{8pt}{1em}\selectfont{}leg. #4};
 	%\node[dateleg]		at ( 0, {\row{6.5}+1mm}) {\fontsize{9pt}{1.2em}\selectfont{}#2{~}\\leg. #4};
@@ -181,12 +188,22 @@
 	\draw ({ \lw / 2},{- \lh / 2 - 2mm}) -- ({ \lw / 2)}, {-\lh / 2 - 1mm}) ;
 	\draw ({ \lw / 2},{+ \lh / 2 + 2mm}) -- ({ \lw / 2)}, { \lh / 2 + 1mm}) ;
 
+	\draw [color=lightgray] ({-\lw / 2 - 1mm},{- \lh / 2}) -- ({-\lw / 2 + 0.5mm)}, {-\lh / 2}) ;
+	\draw [color=lightgray] ({-\lw / 2 - 1mm},{+ \lh / 2}) -- ({-\lw / 2 + 0.5mm)}, { \lh / 2}) ;
+	\draw [color=lightgray] ({ \lw / 2 + 1mm},{- \lh / 2}) -- ({ \lw / 2 - 0.5mm)}, {-\lh / 2}) ;
+	\draw [color=lightgray] ({ \lw / 2 + 1mm},{+ \lh / 2}) -- ({ \lw / 2 - 0.5mm)}, { \lh / 2}) ;
+
+	\draw [color=lightgray] ({-\lw / 2},{- \lh / 2 - 1mm}) -- ({-\lw / 2)}, {-\lh / 2 + 0.5mm}) ;
+	\draw [color=lightgray] ({-\lw / 2},{+ \lh / 2 + 1mm}) -- ({-\lw / 2)}, { \lh / 2 - 0.5mm}) ;
+	\draw [color=lightgray] ({ \lw / 2},{- \lh / 2 - 1mm}) -- ({ \lw / 2)}, {-\lh / 2 + 0.5mm}) ;
+	\draw [color=lightgray] ({ \lw / 2},{+ \lh / 2 + 1mm}) -- ({ \lw / 2)}, { \lh / 2 - 0.5mm}) ;
+
 	\node[counter]		at ( {\lw / 2 - 6mm}, { - \lh / 2 - 3mm}) {\fontsize{6pt}{0.5em}\selectfont\the\counter};
 
 	\end{tikzpicture}
 	\advance\counter by 1
 	\advance\modulo by 1
-	\ifnum \modulo = 4
+	\ifnum \modulo = 5
 		\\
 		\modulo 0
 	\else

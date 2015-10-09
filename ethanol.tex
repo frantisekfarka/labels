@@ -105,7 +105,7 @@
 			draw={\mcol},
 			rectangle,
 			minimum width={\lw},
-			text width={\tw}
+			%text width={\tw}
 		},
 		whoyear/.style = {
 			draw={\mcol},
@@ -183,7 +183,7 @@
 	\node[collection]	at ( 0, {\row{0} + 2mm}) {\fontsize{8pt}{1em}\selectfont\collectio};
 	\node[species]		at ( 0, {\row{1} + 2mm}) {\genspec{15}};
 	\node[who]		at ( 0, {\row{2}}) {\fontsize{10pt}{1em}\selectfont #6};
-	\node[whoyear]		at ( {\col{6}{8} }, {\row{2} - 1.5mm}) {\fontsize{10pt}{1em}\selectfont #9};
+	%\node[whoyear]		at ( {\col{6}{8} }, {\row{2} - 1.5mm}) {\fontsize{10pt}{1em}\selectfont #9};
 	\draw[sep] ({-\lw / 2 - 2mm},{\row{3}+0.5mm}) -- ({\lw / 2 + 2mm},{\row{3}+0.5mm});
 	\node[colId]		at ( 0, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\musnum{}  #3};
 	\node[gender]		at ({\col{3}{4}}, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};

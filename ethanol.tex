@@ -81,6 +81,23 @@
 %	\fi\fi
 }
 
+%if non-empty then comma -- location and date separator
+\newcommand{\necma}[1]{%
+\ifx&#1&%
+% #1 is empty
+\else%
+,% #1 is nonempty
+\fi%
+}
+
+%if non-empty then wrap in parens -- collector specific id
+\newcommand{\necid}[1]{%
+\ifx&#1&%
+% #1 is empty
+\else%
+(#1)% #1 is nonempty
+\fi%
+}
 %Black Tex magic - macro with 10+ args
 \newcommand{\mylabel}[2]{
 	\def\tempgen{\bf\emph{#1}}%
@@ -182,16 +199,16 @@
 
 	\node[collection]	at ( 0, {\row{0} + 2mm}) {\fontsize{8pt}{1em}\selectfont\collectio};
 	\node[species]		at ( 0, {\row{1} + 2mm}) {\genspec{15}};
-	\node[who]		at ( 0, {\row{2}}) {\fontsize{10pt}{1em}\selectfont #6};
-	%\node[whoyear]		at ( {\col{6}{8} }, {\row{2} - 1.5mm}) {\fontsize{10pt}{1em}\selectfont #9};
+	\node[who]		at ( 0, {\row{2} + 2mm}) {\fontsize{10pt}{1em}\selectfont #6};
+        \node[whoyear]		at ( {\col{6}{8} + 1.5mm}, {\row{2} - 1.5mm}) {\fontsize{10pt}{1em}\selectfont #9};
 	\draw[sep] ({-\lw / 2 - 2mm},{\row{3}+0.5mm}) -- ({\lw / 2 + 2mm},{\row{3}+0.5mm});
 	\node[colId]		at ( 0, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\musnum{}  #3};
 	\node[gender]		at ({\col{3}{4}}, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};
-	\node[collectorId]	at ( 0, {\row{5} + 5mm}) {\fontsize{9pt}{1em}\selectfont(#8)};
+	\node[collectorId]	at ( 0, {\row{5} + 5mm}) {\fontsize{9pt}{1em}\selectfont\necid{#8}};
 	\node[location]		at ( 0, {\row{6} + 4mm}) {\fontsize{15pt}{1em}\selectfont\bf\textls{\uppercase{#7}}};
 	
 	%\node[locationPrec]	at ( 0, {\row{7}-1mm}) {\locprec{9}{#1} };
-	\node[locationPrec]	at ( 0, {\row{7}+0mm}) {\fontsize{10pt}{1em}\selectfont#1, #2};
+	\node[locationPrec]	at ( 0, {\row{7}+0mm}) {\fontsize{10pt}{1em}\selectfont#1\necma{#2} #2};
 	%\node[date]		at ( 0, {\row{7}}) {\fontsize{8pt}{1em}\selectfont#2};
 	%\node[dateleg]		at ( 0, {\row{6.5}+1mm}) {\fontsize{9pt}{1.2em}\selectfont{}#2{~}\\leg. #4};
 	\node[author]		at ( 0, {\row{9}+2mm}) {\fontsize{9pt}{1em}\selectfont{}leg. #4};

@@ -1,13 +1,13 @@
 ## Synopsis
 
-Latex template for generating labels from csv (and initially excel) file
+Latex template for generating labels from csv (and initially spreadsheet) file
 
 ## How to run
 
-Just use the ``generate.sh`` with a template and some input file:
+Just use the ``generate.sh`` with a template and an input file:
 
 ```bash
-./generate.sh [template|ethanol|labels] src/sample.csv
+./generate.sh [template|ethanol] src/sample.csv
 ```
 
 ## Templates
@@ -40,7 +40,7 @@ no. field       | expected including a prefix (*e.g.* 'pb')
 type/paratype   |
 
 
-
+Additional columns are ignored.
 
 
 

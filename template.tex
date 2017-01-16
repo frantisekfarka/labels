@@ -37,7 +37,14 @@
 \newcommand{\lbllmar}{-\lw / 2 - 2mm } 
 \newcommand{\lblrmar}{\lw / 2 + 2mm } 
 
-\newcommand{\musnum}{NMP6V}
+% if no MuseumNumber provided empty, else prefix,
+\newcommand{\musnum}[1]{%
+\ifx&#1&%
+% #1 is empty
+\else%
+NMP6V #1% #1 is nonempty
+\fi%
+}
 
 \newlength{\myl}
 
@@ -64,10 +71,10 @@
 }
 
 \newcommand{\gender}[1]{
-	\ifx#1m \male
-	\else\if#1f \female
-	\else #1
-	\fi\fi
+\saveexpandmode\expandarg
+\StrSubstitute{#1}{m}{\male}[\temp]%
+\StrSubstitute{\temp}{f}{\female}%
+\restoreexpandmode%
 }
 
 %Black Tex magic - macro with 10+ args
@@ -165,7 +172,7 @@
 	\node[species]		at ( 0, {\row{1}}) {\genspec{15}};
 	\node[who]		at ( 0, {\row{2}}) {\fontsize{8pt}{1em}\selectfont #6};
 	\draw[sep] ({\lbllmar},{\row{3}}) -- ({\lblrmar},{\row{3}});
-	\node[colId]		at ( 0, {\row{4} + 2mm}) {\fontsize{10pt}{1em}\selectfont\musnum#3};
+	\node[colId]		at ( 0, {\row{4} + 2mm}) {\fontsize{10pt}{1em}\selectfont\musnum{#3}};
 	\node[collectorId]	at ({\col{2}{4}}, {\row{4} + 2mm}) {\fontsize{9pt}{1em}\selectfont(#8)};
 	\node[gender]		at ({\col{3}{4}}, {\row{4} + 2mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};
 	\node[location]		at ( 0, {\row{5} + 1mm}) {\fontsize{15pt}{1em}\selectfont#7};

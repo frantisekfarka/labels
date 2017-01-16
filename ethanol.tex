@@ -42,7 +42,14 @@
 %\newcommand{\collectio}{Collectio Musei Nationalis Pragae}
 \newcommand{\collectio}{~}
 
-\newcommand{\musnum}{NMP6V}
+% if no MuseumNumber provided empty, else prefix,
+\newcommand{\musnum}[1]{%
+\ifx&#1&%
+% #1 is empty
+\else%
+NMP6V #1% #1 is nonempty
+\fi%
+}
 
 \newlength{\myl}
 
@@ -73,12 +80,14 @@
 	    \tmp#1\stopreplace#2\stopreplace}
 	    \def\stopreplace#1\stopreplace{}
 
+%replace repeated occurnces of m by \male and of f by \female
+%such that patterns like '2mm + f translate correctly'
 \newcommand{\gender}[1]{
-	#1
-%	\ifx#1m \male
-%	\else\if#1f \female
-%	\else #1
-%	\fi\fi
+%	#1
+\saveexpandmode\expandarg
+\StrSubstitute{#1}{m}{\male}[\temp]%
+\StrSubstitute{\temp}{f}{\female}%
+\restoreexpandmode%
 }
 
 %if non-empty then comma -- location and date separator
@@ -202,7 +211,7 @@
 	\node[who]		at ( 0, {\row{2} + 2mm}) {\fontsize{10pt}{1em}\selectfont #6};
         \node[whoyear]		at ( {\col{6}{8} + 1.5mm}, {\row{2} - 1.5mm}) {\fontsize{10pt}{1em}\selectfont #9};
 	\draw[sep] ({-\lw / 2 - 2mm},{\row{3}+0.5mm}) -- ({\lw / 2 + 2mm},{\row{3}+0.5mm});
-	\node[colId]		at ( 0, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\musnum{}  #3};
+	\node[colId]		at ( 0, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\musnum{#3}};
 	\node[gender]		at ({\col{3}{4}}, {\row{4} + 3mm}) {\fontsize{10pt}{1em}\selectfont\gender{#5}};
 	\node[collectorId]	at ( 0, {\row{5} + 5mm}) {\fontsize{9pt}{1em}\selectfont\necid{#8}};
 	\node[location]		at ( 0, {\row{6} + 4mm}) {\fontsize{15pt}{1em}\selectfont\bf\textls{\uppercase{#7}}};

@@ -31,16 +31,16 @@ location        |
 date            | preferably in format D. M. YYYY
 *empty*         | originally no. field without a prefix
 no. collection  | automatically prefixed by *NMP6V*
-prep            | type of sample
+*empty*         | type of sample, not rendered
 legit           |
-sex             | format `2mm + 3ff`; m's and f' are automatically replaced
+sex             | format `2mm + 3ff`; m's and f's are automatically replaced
 described       |
 state           |
-no. field       | expected including a prefix (*e.g.* 'pb')
+no. field       | expected including a prefix (*e.g.* 'ff1234')
 type/paratype   |
 
 
-Additional columns are ignored.
+Additional columns are ignored. 
 
 
 

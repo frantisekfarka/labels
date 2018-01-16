@@ -10,6 +10,8 @@ Just use the ``generate.sh`` with a template and an input file:
 ./generate.sh [template|ethanol] src/sample.csv
 ```
 
+The generated file can than be found in `out/sample.pdf`.
+
 ## Templates
 
 Available templates:
@@ -41,6 +43,16 @@ type/paratype   |
 
 
 Additional columns are ignored. 
+
+## Advanced Configuration
+
+The `generate.sh` script can be overriden such that the output is *e.g.*
+uploaded to a remote server by providen an overriding file `.config`:
+
+```bash
+CP=scp
+DEST_PATH=example.com:/home/labels/
+```
 
 
 

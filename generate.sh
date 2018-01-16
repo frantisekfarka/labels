@@ -9,7 +9,7 @@ MV=mv
 CAT=cat
 CUT="cut -d;"
 CP=cp
-DEST_PATH=out
+DEST_PATH=out/
 
 . .config
 

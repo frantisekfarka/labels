@@ -4,11 +4,14 @@
 \usepackage{xstring}
 \usepackage{calc}
 
+\usepackage[letterspace=150]{microtype}
+
 \usepackage[none]{hyphenat}
 
 \usepackage[scaled]{uarial}
 \renewcommand*\familydefault{\sfdefault} 
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 
 \usepackage[utf8]{inputenc}
 \usepackage{adjustbox}
@@ -83,7 +86,7 @@ NMP6V #1% #1 is nonempty
 	\def\tempspec{\IfStrEq{#2}{sp.}{sp.}{\emph{#2}}}%
 	\mylabelcont
 }
-\newcommand{\mylabelcont}[8]{
+\newcommand{\mylabelcont}[9]{
 	\noindent
 	\begin{tikzpicture}[
 		%framed,

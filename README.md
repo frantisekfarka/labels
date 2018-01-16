@@ -1,4 +1,4 @@
-## Synopsis
+# Synopsis
 
 Latex template for generating labels from csv (and initially spreadsheet) file
 
@@ -19,7 +19,7 @@ Available templates:
 
 ## Input format
 
-Data are prepared in *e.g.* spreadsheet and separated into csv (semicolon
+Data are prepared in *e.g.* spreadsheet and exported into csv (semicolon
 separated; no filed delimiters); columns in the spreadsheet are:
 
 

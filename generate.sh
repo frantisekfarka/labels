@@ -14,7 +14,19 @@ DEST_PATH=out/
 . .config
 
 if [ $# -le 1 ]; then
-	echo "Provide a filename(s) to process ..."
+	#echo "Provide a filename(s) to process ..."
+    
+        echo "Usage: $0 template file..."
+        echo "Generates labels in a form given the by template from file(s) to $DEST_PATH"
+        echo ""
+        echo "available templates are:"
+        echo "  template"
+        echo "  ethanol"
+        echo ""
+        echo "Examples:"
+        echo "  $0 template src/sample.csv"
+        echo "  $0 ethanol src/sample.csv"
+
 	exit 1
 fi
 

@@ -1,13 +1,13 @@
 # Synopsis
 
-Latex template for generating labels from csv (and initially spreadsheet) file
+Latex template for generating labels from a csv (and initially a spreadsheet) file
 
 ## How to run
 
 Just use the ``generate.sh`` with a template and an input file:
 
 ```bash
-./generate.sh [template|ethanol] src/sample.csv
+./generate.sh [skull|ethanol] src/sample.csv
 ```
 
 The generated file can than be found in `out/sample.pdf`.
@@ -16,13 +16,13 @@ The generated file can than be found in `out/sample.pdf`.
 
 Available templates:
 
-* __template__ in `template.tex`, small labels intended for skull samples
+* __skull__ in `skull.tex`, small labels intended for skull samples
 * __ethanol__ in `ethanol.tex`, big labels for samples in ethanol
 
 ## Input format
 
-Data are prepared in *e.g.* spreadsheet and exported into csv (semicolon
-separated; no filed delimiters); columns in the spreadsheet are:
+Data are prepared in *e.g.* a spreadsheet and exported into csv (semicolon
+separated; no field delimiters); columns in the spreadsheet are:
 
 
 Column          | Note
@@ -46,8 +46,8 @@ Additional columns are ignored.
 
 ## Advanced Configuration
 
-The `generate.sh` script can be overriden such that the output is *e.g.*
-uploaded to a remote server by providen an overriding file `.config`:
+The `generate.sh` script can be overridden such that the output is *e.g.*
+uploaded to a remote server by providing an overriding file `.config`:
 
 ```bash
 CP=scp

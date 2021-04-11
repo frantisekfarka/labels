@@ -20,11 +20,11 @@ if [ $# -le 1 ]; then
         echo "Generates labels in a form given the by template from file(s) to $DEST_PATH"
         echo ""
         echo "available templates are:"
-        echo "  template"
+        echo "  skull"
         echo "  ethanol"
         echo ""
         echo "Examples:"
-        echo "  $0 template src/sample.csv"
+        echo "  $0 skull src/sample.csv"
         echo "  $0 ethanol src/sample.csv"
 
 	exit 1
